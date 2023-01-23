@@ -14,7 +14,9 @@
                 <div>
                     <h2 class="font-montserrat px-5 text-center flex justify-center space-x-2 items-center">
                         <span class="text-sm text-slate-600">[{{ $establishment->fsic }}]</span>
-                        <span class="font-semibold text-blue-900">{{ $establishment->name }}</span>
+                        <a href="{{ route('establishments.show', $establishment->id) }}" class="underline">
+                            <span class="font-semibold text-blue-900">{{ $establishment->name }}</span>
+                        </a>
                     </h2>
                 </div>
 

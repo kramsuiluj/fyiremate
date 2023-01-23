@@ -32,7 +32,7 @@
         <x-containers.content class="mb-5">
             <div>
                 <h2 class="font-montserrat px-5 py-5 border-b text-center">
-                    <span class="font-semibold text-blue-900">CREATE FIRE SAFETY INSPECTION CERTIFICATE</span>
+                    <span class="font-semibold text-blue-900">EDIT FIRE SAFETY INSPECTION CERTIFICATE</span>
                 </h2>
             </div>
 
@@ -141,7 +141,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
                                 </svg>
                             </div>
-                            <input name="fsic" type="text" id="input-group-1" class="bg-gray-200 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-12 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="FSIC #" value="{{ $establishment->fsic }}" form="create-establishment" disabled>
+                            <input name="fsic" type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-12 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="FSIC #" value="{{ old('fsic') ?? $certificate->fsic }}" form="create-io" required>
                             @error('fsic')
                             <p class="text-xs absolute text-red-500">{{ $message }}</p>
                             @enderror
@@ -241,10 +241,10 @@
     @endif
 </x-layout>
 
-<form style="display: none" action="{{ route('establishments.certificates.store', $establishment->id) }}" method="POST" id="create-io">
+<form style="display: none" action="{{ route('establishments.certificates.update', [$establishment->id, $certificate->id]) }}" method="POST" id="create-io">
     @csrf
+    @method('PATCH')
 
-    <input type="hidden" name="fsic" value="{{ $establishment->fsic }}">
     <input type="hidden" name="owner" value="{{ $establishment->owner }}">
     <input type="hidden" name="establishment" value="{{ $establishment->name }}">
     <input type="hidden" name="address" value="{{ $establishment->address }}">

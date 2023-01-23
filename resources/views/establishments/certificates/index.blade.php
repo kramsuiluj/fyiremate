@@ -113,7 +113,7 @@
                                                         >
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 w-5 h-5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
 
-                                                            <form id="delete-{{ $certificate->id }}" action="{{ route('establishments.inspections.destroy', [$establishment->id, $certificate->id]) }}" method="POST" style="display: none">
+                                                            <form id="delete-{{ $certificate->id }}" action="{{ route('establishments.certificates.destroy', [$establishment->id, $certificate->id]) }}" method="POST" style="display: none">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
@@ -133,9 +133,9 @@
                                                                                     </svg>
                                                                                 </div>
                                                                                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                                                                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Delete Inspection Order</h3>
+                                                                                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Delete FSIC</h3>
                                                                                     <div class="mt-2">
-                                                                                        <p class="text-sm text-gray-500">Are you sure you want to delete this Inspection Order?</p>
+                                                                                        <p class="text-sm text-gray-500">Are you sure you want to delete this FSIC?</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

@@ -77,6 +77,7 @@ Route::group(['prefix' => 'establishments', 'as' => 'establishments.'], function
     Route::get('/{establishment}/certificates/{certificate}', [CertificateController::class, 'show'])->name('certificates.show');
     Route::post('/{establishment}/certificates/', [CertificateController::class, 'store'])->name('certificates.store');
     Route::get('/{establishment}/certificates/{certificate}/edit', [CertificateController::class, 'edit'])->name('certificates.edit');
+    Route::patch('/{establishment}/certificates/{certificate}', [CertificateController::class, 'update'])->name('certificates.update');
     Route::delete('/{establishment}/certificates/{certificate}', [CertificateController::class, 'destroy'])->name('certificates.destroy');
 
     Route::get('/{establishment}/certificates/{certificate}/print', \App\Http\Controllers\CertificatePrintController::class)->name('certificates.print');
