@@ -10,13 +10,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Rap2hpoutre\FastExcel\FastExcel;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class EstablishmentController extends Controller
 {
     public function index()
     {
+        $establishment = Establishment::latest('id')->filter(request(['search']))->paginate(10)->withQueryString();
+
+//        QueryBuilder::for(Establishment::class)
+//            ->allowedFilters(['name', 'owner'])
+//            ->paginate(10)
+//            ->withQueryString()
+
         return view('establishments.index', [
-            'establishments' => Establishment::latest('id')->paginate(10)->withQueryString()
+            'establishments' => $establishment
         ]);
     }
 

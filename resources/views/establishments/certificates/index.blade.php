@@ -4,7 +4,7 @@
 
     <x-sub-header>
         <div class="px-5">
-            <span class="font-daysone text-blue-900">INSPECTION ORDERS</span>
+            <span class="font-daysone text-blue-900">FIRE SAFETY INSPECTION CERTIFICATES</span>
         </div>
     </x-sub-header>
 
@@ -20,26 +20,26 @@
                     </h2>
                 </div>
 
-                <a href="{{ route('establishments.inspections.create', $establishment->id) }}" class="text-blue-600 border-2 border-blue-600 bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xs px-4 py-1.5 text-center mr-2 mb-2 flex items-center space-x-2">
+                <a href="{{ route('establishments.certificates.create', $establishment->id) }}" class="text-blue-600 border-2 border-blue-600 bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xs px-4 py-1.5 text-center mr-2 mb-2 flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
                     </svg>
 
 
-                    <span>Create Inspection Order</span>
+                    <span>Create Certificate</span>
                 </a>
             </div>
         </div>
 
         <div class="w-11/12 mx-auto my-3 font-montserrat">
-            @if(count($inspections) == 0)
+            @if(count($certificates) == 0)
                 <div class="py-2 px-2 rounded pb-5">
                     <p class="font-montserrat text-sm text-slate-500 flex space-x-1 items-center justify-center underline">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                         </svg>
 
-                        <span>Currently, there are no Inspection Order(s) in the system.</span>
+                        <span>Currently, there are no Fire Safety Inspection Certificate/s in the system.</span>
                     </p>
                 </div>
             @else
@@ -53,10 +53,10 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
-                                        Proceed
+                                        Certificate Status
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
-                                        Date Created
+                                        Issued Date
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
 
@@ -64,22 +64,22 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($inspections as $inspection)
+                                @foreach($certificates as $certificate)
                                     <tr class="hover:bg-gray-100">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center justify-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs font-medium text-slate-600">
-                                                        {{ $inspection->io_number }}
+                                                        {{ $certificate->fsic }}
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
+                                            <div class="flex items-center justify-center">
                                                 <div class="ml-4">
-                                                    <div class="text-xs text-slate-600">
-                                                        {!! $inspection->proceed !!}
+                                                    <div class="text-xs text-slate-600 font-semibold">
+                                                        {!! $certificate->validity !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,7 +88,7 @@
                                             <div class="flex items-center justify-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs text-slate-600">
-                                                        {{ date('F j, Y, g:i a', strtotime($inspection->created_at)) }}
+                                                        {{ date('F j, Y, g:i a', strtotime($certificate->filled_date)) }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -97,23 +97,14 @@
                                             <div class="flex items-center justify-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs text-slate-600 flex space-x-3 items-center">
-                                                        <a id="" href="{{ route('establishments.inspections.print', [$establishment->id, $inspection->id]) }}"
+                                                        <a id="" href="{{ route('establishments.certificates.print', [$establishment->id, $certificate->id]) }}"
                                                            class="text-cyan-700" target="_blank" title="Print">
                                                             <svg class="w-6 h-6 text-blue-900" fill="none"
                                                                  stroke="currentColor"
                                                                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                                                         </a>
 
-                                                        <a id="" href="{{ route('establishments.inspections.checklists.print',
-                                                    [$establishment->id, $inspection->id]) }}"
-                                                           class="text-cyan-700" target="_blank" title="Download Checklist">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                                                            </svg>
-
-                                                        </a>
-
-                                                        <a href="{{ route('establishments.inspections.edit', [$establishment->id, $inspection->id]) }}" title="View Inspection Order Details" class="">
+                                                        <a href="{{ route('establishments.certificates.edit', [$establishment->id, $certificate->id]) }}" title="View Inspection Order Details" class="">
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 feather feather-edit text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                                         </a>
 
@@ -122,7 +113,7 @@
                                                         >
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 w-5 h-5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
 
-                                                            <form id="delete-{{ $inspection->id }}" action="{{ route('establishments.inspections.destroy', [$establishment->id, $inspection->id]) }}" method="POST" style="display: none">
+                                                            <form id="delete-{{ $certificate->id }}" action="{{ route('establishments.inspections.destroy', [$establishment->id, $certificate->id]) }}" method="POST" style="display: none">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
@@ -150,7 +141,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                                            <button type="button" @click.prevent="document.getElementById('delete-{{ $inspection->id }}').submit()" class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Delete</button>
+                                                                            <button type="button" @click.prevent="document.getElementById('delete-{{ $certificate->id }}').submit()" class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Delete</button>
                                                                             <button type="button" @click="show = false" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
                                                                         </div>
                                                                     </div>

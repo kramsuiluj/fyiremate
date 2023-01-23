@@ -37,3 +37,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
 Alpine.start()
+
+import $ from 'jquery';
+window.$ = $;
+
+import jQuery from 'jquery';
+window.jQuery = jQuery;
+
+await import('jquery-ui/themes/base/all.css');
+await import('jquery-ui/dist/jquery-ui');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminActionController;
+use App\Http\Controllers\AdminChecklistController;
 use App\Http\Controllers\AdminChiefController;
 use App\Http\Controllers\AdminChiefDefaultController;
 use App\Http\Controllers\AdminFieldController;
@@ -65,3 +66,6 @@ Route::group(['prefix' => 'chiefs', 'as' => 'chiefs.'], function () {
     Route::patch('{chief}/restore', [AdminChiefController::class, 'restore'])->name('restore');
     Route::delete('{chief}', [AdminChiefController::class, 'destroy'])->name('destroy');
 });
+
+Route::get('/uploads/checklist', [AdminChecklistController::class, 'create'])->name('checklists.upload');
+Route::post('/uploads/checklist/upload', [AdminChecklistController::class, 'store'])->name('checklists.store');

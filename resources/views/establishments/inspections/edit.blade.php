@@ -32,7 +32,7 @@
         <x-containers.content class="mb-5">
             <div>
                 <h2 class="font-montserrat px-5 py-5 border-b text-center">
-                    <span class="font-semibold text-blue-900">CREATE INSPECTION ORDER</span>
+                    <span class="font-semibold text-blue-900">EDIT INSPECTION ORDER RECORD</span>
                 </h2>
             </div>
 
@@ -44,7 +44,7 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
                             </div>
-                            <input name="processed_at" type="date" id="processed_at" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" value="{{ old('processed_at') }}" form="create-io" required>
+                            <input name="processed_at" type="date" id="processed_at" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" value="{{ old('processed_at') ?? $inspection->processed_at }}" form="create-io" required>
                             @error('processed_at')
                             <p class="text-xs absolute text-red-500">{{ $message }}</p>
                             @enderror
@@ -61,7 +61,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
                                 </svg>
                             </div>
-                            <input name="io_number" type="text" id="io_number" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-12 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Inspection Order #" value="{{ old('io_number') ?? $io_prefix->value . '-' }}" form="create-io">
+                            <input name="io_number" type="text" id="io_number" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-12 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Inspection Order #" value="{{ old('io_number') ?? $inspection->io_number }}" form="create-io">
                             @error('io_number')
                             <p class="text-xs absolute text-red-500">{{ $message }}</p>
                             @enderror
@@ -107,7 +107,7 @@
                     </div>
 
 
-                    <input name="to" type="text" class="bg-gray-50 border border-gray-300 rounded-md flex-1" form="create-io" value="">
+                    <input name="to" type="text" class="bg-gray-50 border border-gray-300 rounded-md flex-1 text-sm" form="create-io" value="{{ old('to') ?? $inspection->to }}">
 
                     <button id="add-inspector" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
                 </div>
@@ -121,7 +121,7 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
                             </div>
-                            <textarea name="proceed" type="date" id="proceed" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" form="create-io" required style="resize: none; height: 7rem">{{ $establishment->name . ', <br>' . $establishment->address . ', <br>' . $establishment->owner }}</textarea>
+                            <textarea name="proceed" type="date" id="proceed" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" form="create-io" required style="resize: none; height: 7rem">{{ old('proceed') ?? $inspection->proceed }}</textarea>
                             @error('proceed')
                             <p class="text-xs absolute text-red-500">{{ $message }}</p>
                             @enderror
@@ -134,7 +134,7 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
                             </div>
-                            <textarea name="duration" id="duration" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" form="create-io" required style="resize: none; height: 7rem">Until the completion of inspection.</textarea>
+                            <textarea name="duration" id="duration" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" form="create-io" required style="resize: none; height: 7rem">{{ old('duration') ?? $inspection->duration }}</textarea>
                             @error('duration')
                             <p class="text-xs absolute text-red-500">{{ $message }}</p>
                             @enderror
@@ -150,7 +150,7 @@
 
                             </div>
                             <textarea name="purpose" id="purpose" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" form="create-io" value="" required style="resize: none; height: 7rem"
-                            >To conduct inspection for</textarea>
+                            >{{ old('purpose') ?? $inspection->purpose }}</textarea>
                             @error('purpose')
                             <p class="text-xs absolute text-red-500">{{ $message }}</p>
                             @enderror
@@ -163,7 +163,7 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
                             </div>
-                            <textarea name="remarks" id="remarks" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" form="create-io" required style="resize: none; height: 7rem"></textarea>
+                            <textarea name="remarks" id="remarks" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-5 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" form="create-io" required style="resize: none; height: 7rem">{{ old('remarks') ?? $inspection->remarks }}</textarea>
                             @error('remarks')
                             <p class="text-xs absolute text-red-500">{{ $message }}</p>
                             @enderror
@@ -225,36 +225,36 @@
     @endif
 </x-layout>
 
-<form style="display: none" action="{{ route('establishments.inspections.store', $establishment->id) }}" method="POST" id="create-io">
+<form style="display: none" action="{{ route('establishments.inspections.update', [$establishment->id, $inspection->id]) }}" method="POST" id="create-io">
     @csrf
+    @method('PATCH')
     <input type="hidden" name="establishment_id" value="{{ $establishment->id }}">
 </form>
 
 <script>
     // window.onload = function () {
-        const selectedInspector = document.getElementById('selected-inspector');
-        const addInspector = document.getElementById('add-inspector');
-        const to = document.querySelector('[name="to"]')
+    const selectedInspector = document.getElementById('selected-inspector');
+    const addInspector = document.getElementById('add-inspector');
+    const to = document.querySelector('[name="to"]')
 
-        addInspector.disabled = true;
+    addInspector.disabled = true;
 
-        function setInspector(e) {
-            selectedInspector.innerText = e.innerText;
-            addInspector.disabled = false;
+    function setInspector(e) {
+        selectedInspector.innerText = e.innerText;
+        addInspector.disabled = false;
+    }
+
+    addInspector.addEventListener('click', () => {
+
+        let finalValue;
+
+        if (to.value === '') {
+            to.value = selectedInspector.innerText;
+        } else {
+            to.value += ', ' + selectedInspector.innerText;
         }
 
-        addInspector.addEventListener('click', () => {
-
-            let finalValue;
-
-            if (to.value === '') {
-                to.value = selectedInspector.innerText;
-            } else {
-                to.value += ', ' + selectedInspector.innerText;
-            }
-
-            console.log(to.value.split(',').length >= 3);
-            console.log(to.value.split(',').toString())
-        });
-    // }
+        console.log(to.value.split(',').length >= 3);
+        console.log(to.value.split(',').toString())
+    });
 </script>

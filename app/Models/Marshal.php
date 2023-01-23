@@ -12,7 +12,7 @@ class Marshal extends Model
 
     public function fullname()
     {
-        return $this->firstname . ' ' . $this->middlename[0] . '. ' . $this->lastname;
+        return $this?->rank . ' ' . $this->firstname . ' ' . $this->middlename[0] . '. ' . $this->lastname;
     }
 
     public function default()

@@ -14,4 +14,20 @@ class Establishment extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function inspections()
+    {
+        return $this->hasMany(Inspection::class);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+            $query->where(fn($query) =>
+                $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('owner', 'like', '%' . $search . '%')
+                ->orWhere('fsic', 'like', '%' . $search . '%')
+            )
+        );
+    }
 }
