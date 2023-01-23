@@ -7,7 +7,7 @@
                 <svg id="open" class="w-6 h-6 text-blue-900 hover:text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </div>
 
-            <a href="javascript:void(0)" class="font-daysone text-lg tracking-wider" style="font-weight: bold">
+            <a href="{{ route('administrators.index') }}" class="font-daysone text-lg tracking-wider" style="font-weight: bold">
                 <span class="text-orange-500">FYIRE</span><span class="text-blue-900">MATE</span>
             </a>
         </section>

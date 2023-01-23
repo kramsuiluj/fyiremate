@@ -25,11 +25,17 @@ class LoginController extends Controller
         session()->regenerate();
 
         if (!auth()->user()->is_admin) {
-            activity('Login')->log('User has logged in.');
+            activity('Login')
+                ->causedBy(auth()->user())
+                ->withProperties(['by' => auth()->user()->fullname()])
+                ->log('User has logged in.');
             return redirect(route('users.dashboard'))->with('success', 'Welcome ' . ucwords(auth()->user()->firstname) . ' !');
         }
 
-        activity('Login')->log('Administrator has logged in.');
+        activity('Login')
+            ->causedBy(auth()->user())
+            ->withProperties(['by' => auth()->user()->fullname()])
+            ->log('Administrator has logged in.');
         return redirect(route('administrators.index'))->with('success', 'Welcome ' . ucwords(auth()->user()->firstname) . ' !');
     }
 }

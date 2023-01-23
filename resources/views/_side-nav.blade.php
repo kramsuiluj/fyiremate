@@ -65,12 +65,10 @@
                     class="flex flex-col mt-1 pb-1 space-y-1"
                 >
                     <li>
-{{--                        {{ route('administrators.marshals.index') }}--}}
-                        <a href=""
-                           class="py-1 w-full flex items-center pl-3 space-x-3 rounded cursor-pointer ">
-{{--                            {{ request()--}}
-{{--                       ->routeIs('administrators.marshals.*') ? 'bg-gray-500 text-white' : 'hover:bg-gray-200'--}}
-{{--                       }}--}}
+                        <a href="{{ route('administrators.marshals.index') }}"
+                           class="py-1 w-full flex items-center pl-3 space-x-3 rounded cursor-pointer {{ request()
+                       ->routeIs('administrators.marshals.*') ? 'bg-orange-500 text-white' : 'hover:bg-gray-200'
+                       }}">
                             <svg class="w-4 h-4" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -82,12 +80,11 @@
                     </li>
 
                     <li>
-{{--                        {{ route('administrators.chiefs.index') }}--}}
-                        <a href=""
-                           class="py-1 w-full flex items-center pl-3 space-x-3 rounded cursor-pointer ">
-{{--                            {{ request()--}}
-{{--                       ->routeIs('administrators.chiefs.*') ? 'bg-gray-500 text-white' : 'hover:bg-gray-200'--}}
-{{--                       }}--}}
+                        <a href="{{ route('administrators.chiefs.index') }}"
+                           class="py-1 w-full flex items-center pl-3 space-x-3 rounded cursor-pointer {{ request()
+                       ->routeIs('administrators.chiefs.*') ? 'bg-orange-500 text-white' : 'hover:bg-gray-200'
+                       }}">
+
                             <svg class="w-4 h-4" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -99,12 +96,10 @@
                     </li>
 
                     <li>
-{{--                        {{ route('administrators.inspectors.index') }}--}}
-                        <a href=""
-                           class="py-1 w-full flex items-center pl-3 space-x-3 rounded cursor-pointer ">
-{{--                            {{ request()--}}
-{{--                       ->routeIs('administrators.inspectors.*') ? 'bg-gray-500 text-white' : 'hover:bg-gray-200'--}}
-{{--                       }}--}}
+                        <a href="{{ route('administrators.inspectors.index') }}"
+                           class="py-1 w-full flex items-center pl-3 space-x-3 rounded cursor-pointer {{ request()
+                       ->routeIs('administrators.inspectors.*') ? 'bg-orange-500 text-white' : 'hover:bg-gray-200'
+                       }}">
                             <svg class="w-4 h-4" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -117,14 +112,11 @@
                 </ul>
             </li>
 
-            <li class="">
-{{--                {{ !request()->routeIs('administrators.users.*') ? 'border-b' : '' }}--}}
-{{--                {{ route('administrators.users.index') }}--}}
-                <a href=""
+            <li class="{{ !request()->routeIs('administrators.users.*') ? 'border-b' : '' }}">
+                <a href="{{ route('administrators.users.index') }}"
                    class="flex items-center space-x-3 px-3 py-3 rounded
-               cursor-pointer ">
-{{--                    {{ request()->routeIs('administrators.users.*') ? 'bg-gray-500 text-white' :--}}
-{{--               'hover:bg-gray-200 hover:rounded' }}--}}
+               cursor-pointer {{ request()->routeIs('administrators.users.*') ? 'bg-orange-500 text-white' :
+               'hover:bg-gray-200 hover:rounded' }}">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -135,14 +127,12 @@
                 </a>
             </li>
 
-            <li class="">
-{{--                {{ !request()->routeIs('administrators.fields.*') ? 'border-b' : '' }}--}}
-{{--                {{ route('administrators.fields.index') }}--}}
-                <a href=""
-                   class="flex items-center space-x-3 px-3 py-3 rounded
-               cursor-pointer ">
-{{--                    {{ request()->routeIs('administrators.fields.*') ? 'bg-gray-500 text-white' :--}}
-{{--               'hover:bg-gray-200 hover:rounded' }}--}}
+            <li class="{{ !request()->routeIs('administrators.fields.*') ? 'border-b' : '' }}">
+
+
+                <a href="{{ route('administrators.fields.index') }}"
+                   class="flex items-center space-x-3 px-3 py-3 rounded cursor-pointer {{ request()->routeIs('administrators.fields.*') ? 'bg-orange-500 text-white' : 'hover:bg-gray-200 hover:rounded' }}"
+                >
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -153,14 +143,11 @@
                 </a>
             </li>
 
-            <li class="">
-{{--                {{ !request()->routeIs('administrators.activities.*') ? 'border-b' : '' }}--}}
-{{--                {{ route('administrators.activities.index') }}--}}
-                <a href=""
+            <li class="{{ !request()->routeIs('administrators.actions.*') ? 'border-b' : '' }}">
+                <a href="{{ route('administrators.actions.index') }}"
                    class="flex items-center space-x-3 px-3 py-3 rounded
-               cursor-pointer ">
-{{--                    {{ request()->routeIs('administrators.activities.*') ? 'bg-gray-500 text-white' :--}}
-{{--               'hover:bg-gray-200 hover:rounded' }}--}}
+               cursor-pointer {{ request()->routeIs('administrators.actions.*') ? 'bg-orange-500 text-white' :
+               'hover:bg-gray-200 hover:rounded' }}">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"

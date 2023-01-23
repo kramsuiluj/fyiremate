@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Field;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -26,5 +27,15 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('!password')
             ]);
         }
+
+        Field::create([
+            'name' => 'id_prefix',
+            'value' => 'RO5-0104-23'
+        ]);
+
+        Field::create([
+            'name' => 'io_prefix',
+            'value' => 'L2023'
+        ]);
     }
 }
