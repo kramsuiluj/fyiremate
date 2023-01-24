@@ -157,71 +157,87 @@
                     <span>Action Logs</span>
                 </a>
             </li>
-        @endcan
 
-        <li>
-            <div id="reports" class="flex items-center px-3 py-3 hover:bg-gray-200 hover:rounded cursor-pointer">
-                <div class="flex items-center space-x-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            <li class="">
+{{--                {{ !request()->routeIs('administrators.actions.*') ? 'border-b' : '' }}--}}
+                <a href=""
+{{--                   {{ route('administrators.actions.index') }}--}}
+                   class="flex items-center space-x-3 px-3 py-3 rounded
+               cursor-pointer ">
+{{--                    {{ request()->routeIs('administrators.actions.*') ? 'bg-orange-500 text-white' :--}}
+{{--               'hover:bg-gray-200 hover:rounded' }}--}}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
                     </svg>
 
                     <span>Reports</span>
-                </div>
+                </a>
+            </li>
+        @endcan
 
-                <div class="ml-auto">
-                    <svg class="w-3.5 h-3.5 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </div>
-            </div>
+{{--        <li>--}}
+{{--            <div id="reports" class="flex items-center px-3 py-3 hover:bg-gray-200 hover:rounded cursor-pointer">--}}
+{{--                <div class="flex items-center space-x-3">--}}
+{{--                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"--}}
+{{--                         xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"--}}
+{{--                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>--}}
+{{--                    </svg>--}}
 
-            <ul id="report-categories"
-                style="font-weight: 300; display: none;"
-                class="flex flex-col mt-1 pb-1 space-y-1"
-            >
-                <li>
-                    <a href="javascript:void(0)"
-                       class="py-1 w-full flex items-center pl-3 space-x-3 rounded hover:bg-gray-200 cursor-pointer">
-                        <svg class="w-4 h-4" fill="#64748B" stroke="#64748B" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        </svg>
+{{--                    <span>Reports</span>--}}
+{{--                </div>--}}
 
-                        <span>Monthly Reports</span>
-                    </a>
-                </li>
+{{--                <div class="ml-auto">--}}
+{{--                    <svg class="w-3.5 h-3.5 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"--}}
+{{--                         xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>--}}
+{{--                    </svg>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-                <li>
-                    <a href="javascript:void(0)"
-                       class="py-1 w-full flex items-center pl-3 space-x-3 rounded hover:bg-gray-200 cursor-pointer">
-                        <svg class="w-4 h-4" fill="#64748B" stroke="#64748B" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        </svg>
+{{--            <ul id="report-categories"--}}
+{{--                style="font-weight: 300; display: none;"--}}
+{{--                class="flex flex-col mt-1 pb-1 space-y-1"--}}
+{{--            >--}}
+{{--                <li>--}}
+{{--                    <a href="javascript:void(0)"--}}
+{{--                       class="py-1 w-full flex items-center pl-3 space-x-3 rounded hover:bg-gray-200 cursor-pointer">--}}
+{{--                        <svg class="w-4 h-4" fill="#64748B" stroke="#64748B" viewBox="0 0 24 24"--}}
+{{--                             xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"--}}
+{{--                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
+{{--                        </svg>--}}
 
-                        <span>Quarterly Reports</span>
-                    </a>
-                </li>
+{{--                        <span>Monthly Reports</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
-                <li>
-                    <a href="javascript:void(0)"
-                       class="py-1 w-full flex items-center pl-3 space-x-3 rounded hover:bg-gray-200 cursor-pointer">
-                        <svg class="w-4 h-4" fill="#64748B" stroke="#64748B" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        </svg>
+{{--                <li>--}}
+{{--                    <a href="javascript:void(0)"--}}
+{{--                       class="py-1 w-full flex items-center pl-3 space-x-3 rounded hover:bg-gray-200 cursor-pointer">--}}
+{{--                        <svg class="w-4 h-4" fill="#64748B" stroke="#64748B" viewBox="0 0 24 24"--}}
+{{--                             xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"--}}
+{{--                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
+{{--                        </svg>--}}
 
-                        <span>Annual Reports</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+{{--                        <span>Quarterly Reports</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+
+{{--                <li>--}}
+{{--                    <a href="javascript:void(0)"--}}
+{{--                       class="py-1 w-full flex items-center pl-3 space-x-3 rounded hover:bg-gray-200 cursor-pointer">--}}
+{{--                        <svg class="w-4 h-4" fill="#64748B" stroke="#64748B" viewBox="0 0 24 24"--}}
+{{--                             xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"--}}
+{{--                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
+{{--                        </svg>--}}
+
+{{--                        <span>Annual Reports</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
     </ul>
 </aside>

@@ -29,7 +29,7 @@ class LoginController extends Controller
                 ->causedBy(auth()->user())
                 ->withProperties(['by' => auth()->user()->fullname()])
                 ->log('User has logged in.');
-            return redirect(route('users.dashboard'))->with('success', 'Welcome ' . ucwords(auth()->user()->firstname) . ' !');
+            return redirect(route('establishments.index'))->with('success', 'Welcome ' . ucwords(auth()->user()->firstname) . ' !');
         }
 
         activity('Login')

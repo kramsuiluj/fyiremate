@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminActionController;
 use App\Http\Controllers\AdminChecklistController;
 use App\Http\Controllers\AdminChiefController;
 use App\Http\Controllers\AdminChiefDefaultController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminFieldController;
 use App\Http\Controllers\AdminInspectorController;
 use App\Http\Controllers\AdminMarshalController;
@@ -11,7 +12,7 @@ use App\Http\Controllers\AdminMarshalDefaultController;
 use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/dashboard', 'administrators.index')->name('index');
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('index');
 
 Route::group(['as' => 'fields.'], function () {
     Route::get('/fields', [AdminFieldController::class, 'index'])->name('index');
