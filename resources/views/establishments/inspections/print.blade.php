@@ -90,21 +90,21 @@
                         <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg font-medium leading-6 text-gray-900"
-                                            id="modal-title">Add Element</h3>
+                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left space-y-4">
+                                        <h3 class="font-montserrat font-semibold leading-6 text-gray-900"
+                                            id="modal-title">ADD ELEMENT</h3>
                                         <div class="mt-2">
                                             <div class="space-y-2">
-                                                <div>
-                                                    <label for="">Text Content</label>
-                                                    <input id="textContent" type="text" class="text-field w-72">
+                                                <div class="font-montserrat flex space-x-2">
+                                                    <label for="" class="text-sm">Text Content</label>
+                                                    <input id="textContent" type="text" class="text-sm bg-gray-50 border border-gray-300 rounded-md w-72">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 font-montserrat">
                                 <button @click="show = false" id="add-element" type="button" class="inline-flex
                                     w-full
                                     justify-center
@@ -342,10 +342,6 @@
 
         save.addEventListener('click', () => {
             let id = active.id;
-            // active.style.top = yPos.value + 'px';
-            // active.style.left = xPos.value + 'px';
-            // console.log(id);
-            // console.log(positions[id].x);
             positions[id].x = xPos.value;
             positions[id].y = yPos.value;
         });
@@ -360,7 +356,7 @@
             let newElement = document.createElement('div');
             newElement.id = id.toString();
             id++;
-            newElement.classList.add('draggable', 'ui-widget-content', 'whitespace-nowrap');
+            newElement.classList.add('draggable', 'whitespace-nowrap');
             newElement.innerText = textContent.value;
 
             page.append(newElement);

@@ -86,21 +86,21 @@
                         <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
-                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <h3 class="text-lg font-medium leading-6 text-gray-900"
-                                            id="modal-title">Add Element</h3>
+                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left space-y-4">
+                                        <h3 class="font-montserrat font-semibold leading-6 text-gray-900"
+                                            id="modal-title">ADD ELEMENT</h3>
                                         <div class="mt-2">
                                             <div class="space-y-2">
-                                                <div>
-                                                    <label for="">Text Content</label>
-                                                    <input id="textContent" type="text" class="text-field w-72">
+                                                <div class="font-montserrat flex space-x-2">
+                                                    <label for="" class="text-sm">Text Content</label>
+                                                    <input id="textContent" type="text" class="text-sm bg-gray-50 border border-gray-300 rounded-md w-72">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 font-montserrat">
                                 <button @click="show = false" id="add-element" type="button" class="inline-flex
                                     w-full
                                     justify-center
@@ -152,25 +152,18 @@
      data-address="{{ $establishment->address }}"
      data-description="{{ $certificate->description }}"
      data-valid-until="{{ $certificate->valid_until }}"
-     data-amount="{{ $establishment->amount_paid }}"
-     data-or-number="{{ $establishment->or_number }}"
-     data-payment-date="{{ $establishment->date_paid }}"
+     data-amount="{{ $establishment->payments->last()->amount_paid }}"
+     data-or-number="{{ $establishment->payments->last()->or_number }}"
+     data-payment-date="{{ $establishment->payments->last()->date_paid }}"
      data-chief="{{ $certificate->chief }}"
      data-marshal="{{ $certificate->marshal }}"
      data-establishment="{{ $establishment->name }}"
-    {{--     data-others="{{ $certificate->others }}"--}}
 >
 </div>
 
 <div id="pos" style="display: none" data-positions="{{ $positions->pos }}">
 
 </div>
-
-{{--    <div id="page-config"--}}
-{{--         data-name="{{ $page->name }}"--}}
-{{--         data-rule="{{ $page->rule }}"--}}
-{{--    >--}}
-{{--    </div>--}}
 
 <div id="page" class="bg-white relative mx-auto justify-between outline outline-gray-400 box-border"
      data-size="A4">
@@ -190,65 +183,12 @@
         let textContent = document.getElementById('textContent');
         const details = document.getElementById('details').dataset;
         const elements = Object.fromEntries(Object.entries(JSON.parse(JSON.stringify(details))).filter(([_, v]) => v != ""));
-        // const pageConfig = document.getElementById('page-config').dataset;
         const positions = JSON.parse(document.getElementById('pos').dataset.positions);
-        // console.log(JSON.parse(document.getElementById('pos').dataset.positions));
-
-        // console.log(positions.fsicId.x.toString());
-
-        // console.log(pageConfig.rule);
-
-        // console.log(elements);
-
-        // const positions = {
-        //     fsicId: {
-        //         y: `${poss.fsicId.y}`,
-        //         x: '150px'
-        //     },
-        //     filledDate: {
-        //         y: '150px',
-        //         x: '550px'
-        //     },
-        //     establishment: {
-        //         y: '300px',
-        //         x: '325px'
-        //     },
-        //     applicant: {
-        //         y: '325px',
-        //         x: '325px'
-        //     },
-        //     description: {
-        //         y: '500px',
-        //         x: '500px'
-        //     },
-        //     validUntil: {
-        //         y: '540px',
-        //         x: '550px'
-        //     },
-        //     chief: {
-        //         y: '620px',
-        //         x: '530px'
-        //     },
-        //     marshal: {
-        //         y: '700px',
-        //         x: '530px'
-        //     },
-        //     amount: {
-        //         y: '590px',
-        //         x: '150px'
-        //     },
-        //     orNumber: {
-        //         y: '610px',
-        //         x: '150px'
-        //     },
-        //     paymentDate: {
-        //         y: '630px',
-        //         x: '130px'
-        //     }
-        // };
 
         const pos = document.querySelector('[name="positions"]');
         pos.value = JSON.stringify(positions);
+
+        console.log(elements);
 
         for (const element in elements) {
             const item = document.createElement('div');
@@ -292,7 +232,6 @@
                 active = item;
                 xPos.value = Math.round(active.getBoundingClientRect().left - page.getBoundingClientRect().left);
                 yPos.value = Math.round(active.getBoundingClientRect().top - page.getBoundingClientRect().top);
-                // console.log(item);
             });
         }
 
@@ -304,7 +243,7 @@
 
         if (document.getElementById('filledDate')) {
             let filledDate = document.getElementById('filledDate');
-            filledDate.innerText = formatDate(filledDate.innerText);
+            filledDate.innerText = filledDate.innerText;
             filledDate.style.top = positions.filledDate.y.toString();
             filledDate.style.left = positions.filledDate.x.toString();
         }
@@ -335,7 +274,7 @@
 
         if (document.getElementById('validUntil')) {
             let validUntil = document.getElementById('validUntil');
-            validUntil.innerText = formatDate(validUntil.innerText);
+            validUntil.innerText = validUntil.innerText;
             validUntil.style.top = positions.validUntil.y.toString();
             validUntil.style.left = positions.validUntil.x.toString();
         }
@@ -366,65 +305,23 @@
 
         if (document.getElementById('paymentDate')) {
             let paymentDate = document.getElementById('paymentDate');
-            paymentDate.innerText = formatDate(paymentDate.innerText);
+            paymentDate.innerText = paymentDate.innerText;
             paymentDate.style.top = positions.paymentDate.y.toString();
             paymentDate.style.left = positions.paymentDate.x.toString();
         }
-
-        // if (document.getElementById('others')) {
-        //     if (document.getElementById('others').innerText != "") {
-        //         let others = document.getElementById('others');
-        //         others.style.top = '230px';
-        //         others.style.left = '260px';
-        //
-        //         let img = document.createElement('div');
-        //         img.id = 'testImage';
-        //         img.classList.add('draggable', 'ui-widget-content', 'whitespace-nowrap');
-        //         img.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
-        //         page.append(img);
-        //
-        //         $(() => {
-        //             $('#testImage').draggable({
-        //                 containment: '#page',
-        //                 scroll: false,
-        //                 start: (e) => {
-        //                     active = e.target;
-        //                 },
-        //                 drag: (e) => {
-        //                     xPos.value = Math.round(e.target.getBoundingClientRect().left - page.getBoundingClientRect().left);
-        //                     yPos.value = Math.round(e.target.getBoundingClientRect().top - page.getBoundingClientRect().top);
-        //                 }
-        //             });
-        //         });
-        //     }
-        //
-        //
-        // }
-
-        function formatDate(element) {
-            let year = new Date(element).getFullYear();
-            let month = new Date(element).getMonth();
-            let date = new Date(element).getDate();
-
-            return year + '-' + month + '-' + date
-        }
-
+        
         xPos.addEventListener('keydown', () => {
             activeId = active.id;
             active.style.left = xPos.value + 'px';
             positions[activeId].x = active.style.left;
             pos.value = JSON.stringify(positions);
-            // console.log(positions);
         });
-
-        // console.log(positions);
 
         xPos.addEventListener('keyup', () => {
             activeId = active.id;
             active.style.left = xPos.value + 'px';
             positions[activeId].x = active.style.left;
             pos.value = JSON.stringify(positions);
-            // console.log(positions);
         });
 
         yPos.addEventListener('keydown', () => {
@@ -432,7 +329,6 @@
             active.style.top = yPos.value + 'px';
             positions[activeId].y = active.style.top;
             pos.value = JSON.stringify(positions);
-            // console.log(positions);
         });
 
         yPos.addEventListener('keyup', () => {
@@ -440,15 +336,10 @@
             active.style.top = yPos.value + 'px';
             positions[activeId].y = active.style.top;
             pos.value = JSON.stringify(positions);
-            // console.log(positions);
         });
 
         save.addEventListener('click', () => {
             let id = active.id;
-            // active.style.top = yPos.value + 'px';
-            // active.style.left = xPos.value + 'px';
-            // console.log(id);
-            // console.log(positions[id].x);
             positions[id].x = xPos.value;
             positions[id].y = yPos.value;
         });
@@ -463,7 +354,7 @@
             let newElement = document.createElement('div');
             newElement.id = id.toString();
             id++;
-            newElement.classList.add('draggable', 'ui-widget-content', 'whitespace-nowrap', 'cursor-move');
+            newElement.classList.add('draggable', 'whitespace-nowrap', 'cursor-move');
             newElement.innerText = textContent.value;
 
             page.append(newElement);
@@ -486,61 +377,10 @@
                 active = newElement;
                 xPos.value = Math.round(active.getBoundingClientRect().left - page.getBoundingClientRect().left);
                 yPos.value = Math.round(active.getBoundingClientRect().top - page.getBoundingClientRect().top);
-                // console.log(newElement);
             });
 
             textContent.value = '';
         });
-
-        const a4Button = document.getElementById('a4-button');
-        const legalButton = document.getElementById('legal-button');
-
-        const a4Rule = "@page { size: a4; margin: 1%; }";
-        const legalRule = "@page { size: legal; margin: 1%; }";
-
-        const a4Dimensions = '#page[data-size="A4"] { width: 21cm; height: 29.7cm; }';
-        const legalDimensions = '#page[data-size="legal"] { width: 21cm; height: 90cm; }';
-
-        // let currentPageRule = window.document.styleSheets.item(1).cssRules.item(0).style.parentRule.cssText;
-        // let testRule = window.document.styleSheets.item(1).cssRules.item(0).style;
-        // let currentPageDimensions = window.document.styleSheets.item(1).cssRules.item(1).cssText;
-
-        // page.dataset.size = 'legal'
-        // page.style.width = '21cm';
-        // page.style.height = '35.56cm';
-
-        let cssPagedMedia = (function () {
-            let style = document.createElement('style');
-            document.head.appendChild(style);
-            return function (rule) {
-                style.innerHTML = rule;
-            };
-        }());
-
-        cssPagedMedia.size = function (size) {
-            cssPagedMedia('@page { size: ' + size + '; margin: 1%; }');
-        };
-
-        // cssPagedMedia.size(pageConfig.rule);
-
-        // console.log(currentPageRule);
-        // console.log(testRule);
-
-        // a4Button.addEventListener('click', () => {
-        //     currentPageRule = a4Rule;
-        //     currentPageDimensions = a4Dimensions;
-        //
-        //     console.log(currentPageDimensions);
-        //     console.log(currentPageRule);
-        // });
-        //
-        // legalButton.addEventListener('click', () => {
-        //     currentPageRule = legalRule;
-        //     currentPageDimensions = legalDimensions;
-        //
-        //     console.log(currentPageDimensions);
-        //     console.log(currentPageRule);
-        // })
     }
 </script>
 </body>

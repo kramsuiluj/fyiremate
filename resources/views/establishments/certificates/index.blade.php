@@ -78,7 +78,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center justify-center">
                                                 <div class="ml-4">
-                                                    <div class="text-xs text-slate-600 font-semibold">
+                                                    <div class="text-xs font-semibold {{ $certificate->validity == 'Valid' ? 'bg-green-500 px-2 py-0.5 rounded leading-4 text-white' : 'bg-red-500 px-2 py-0.5 rounded leading-4 text-white' }}">
                                                         {!! $certificate->validity !!}
                                                     </div>
                                                 </div>
@@ -88,7 +88,7 @@
                                             <div class="flex items-center justify-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs text-slate-600">
-                                                        {{ date('F j, Y, g:i a', strtotime($certificate->filled_date)) }}
+                                                        {{ date('F j, Y', strtotime($certificate->filled_date)) }}
                                                     </div>
                                                 </div>
                                             </div>
