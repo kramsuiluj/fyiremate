@@ -59,7 +59,13 @@ class EstablishmentController extends Controller
                         $fsic_prefix = $id[0] . '-' . $id[1] . '-' . $id[2];
                         $fsic_number = (int)$id[3];
 
-                        $establishment['FSIC #'] = $fsic_prefix . '-' . strval($fsic_number);
+                        if (strlen((int)$fsic_number) == 1) {
+                            $establishment['FSIC #'] = $fsic_prefix . '-000' . strval($fsic_number);
+                        } else if (strlen((int)$fsic_number) == 2) {
+                            $establishment['FSIC #'] = $fsic_prefix . '-00' . strval($fsic_number);
+                        } else {
+                            $establishment['FSIC #'] = $fsic_prefix . '-' . strval($fsic_number);
+                        }
                     } catch (\Exception $e) {
                         throw ValidationException::withMessages([
                             'establishments' => 'The <span class="font-semibold">FSIC #</span> value format is invalid.'

@@ -260,6 +260,17 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
                                 </svg>
                             </div>
+
+                            @php
+                                if (strlen(strval($nextId)) == 1) {
+                                    $nextId = '000' . strval($nextId);
+                                } elseif (strlen(strval($nextId)) == 2) {
+                                    $nextId = '00' . strval($nextId);
+                                } else {
+                                    $nextId = strval($nextId);
+                                }
+                            @endphp
+
                             <input name="fsic" type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-slate-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-12 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="FSIC #" value="{{ old('fsic') ?? $id_prefix . '-' . $nextId }}" form="create-establishment">
                             @error('fsic')
                                 <p class="text-xs absolute text-red-500">{{ $message }}</p>

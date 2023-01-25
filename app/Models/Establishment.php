@@ -29,5 +29,15 @@ class Establishment extends Model
                 ->orWhere('fsic', 'like', '%' . $search . '%')
             )
         );
+
+        $query->when($filters['from'] ?? false, fn($query, $from) =>
+            $query->when($filters['to'] ?? false, fn ($query, $to) =>
+                $query->whereBetween('date', [$from, $to])
+            )
+//            $query->where(fn($query) =>
+//                $query->whereBetween('data', [$from, $to])
+//            )
+//            $query->whereBetween('date', [$from, $to])
+        );
     }
 }

@@ -46,7 +46,7 @@ class CertificateController extends Controller
     public function store(Establishment $establishment)
     {
         $attributes = request()->validate([
-            'fsic' => ['required'],
+            'fsic' => ['required', Rule::unique('certificates', 'fsic')],
             'filled_date' => ['required'],
             'valid_until' => ['required'],
             'description' => ['required', 'max:200'],

@@ -111,3 +111,21 @@ Route::patch('updates/validity/update', function () {
 
     return redirect(route('administrators.index'))->with('success', 'You have successfully updated the validity of FSICs.');
 })->name('updates.validity');
+
+Route::get('/reports', function () {
+//    $from = '2022-08-04';
+//    $to = Carbon::now()->toDateString();
+
+//    dd(\App\Models\Establishment::whereBetween('date', [$from, $to])->get());
+
+//    dd(\App\Models\Establishment::where('occupancy', 'business')->get());
+    if (request()->has(['from', 'to'])) {
+        $establishments = \App\Models\Establishment::filter(request(['from', 'to']))->get();
+    } else {
+        $establishments = null;
+    }
+
+    return view('administrators.reports.index', [
+        'establishments' => $establishments
+    ]);
+});
