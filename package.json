@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.11.1",
+        "chart.js": "^4.2.0",
         "daisyui": "^2.47.0",
         "flowbite": "^1.6.2",
         "jquery": "^3.6.3",

@@ -182,6 +182,16 @@ class CertificateController extends Controller
 
         if ($certificate->valid_until != $attributes['valid_until']) {
             $updated['valid_until'] = $attributes['valid_until'];
+
+            $validity = Carbon::createFromDate($attributes['valid_until'])->isFuture();
+
+            if ($validity) {
+                $attributes['validity'] = 'Valid';
+            } else {
+                $attributes['validity'] = 'Invalid';
+            }
+
+            $updated['validity'] = $attributes['validity'];
         }
 
         if ($certificate->description != $attributes['description']) {

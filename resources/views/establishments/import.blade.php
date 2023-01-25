@@ -2,6 +2,10 @@
     @include('_header')
     @include('_side-nav')
 
+    <section id="loading">
+        <div id="loading-content"></div>
+    </section>
+
     <x-sub-header>
         <div class="px-5">
             <span class="font-daysone text-blue-900">ESTABLISHMENTS</span>
@@ -56,6 +60,7 @@
                         </div>
 
                         <button type="submit"
+                                onclick="showLoading()"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full"
                         >
                             Upload File
@@ -82,3 +87,15 @@
         </div>
     @endif
 </x-layout>
+
+<script>
+    // function showLoading() {
+    //     document.querySelector('#loading').classList.add('loading');
+    //     document.querySelector('#loading-content').classList.add('loading-content');
+    // }
+    //
+    // function hideLoading() {
+    //     document.querySelector('#loading').classList.remove('loading');
+    //     document.querySelector('#loading-content').classList.remove('loading-content');
+    // }
+</script>

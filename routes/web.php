@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CertificatePrintController;
 use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\InspectionController;
 use App\Http\Controllers\InspectionPrintController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Models\Certificate;
 use App\Models\Position;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'guest'], function () {
@@ -80,5 +83,31 @@ Route::group(['prefix' => 'establishments', 'as' => 'establishments.'], function
     Route::patch('/{establishment}/certificates/{certificate}', [CertificateController::class, 'update'])->name('certificates.update');
     Route::delete('/{establishment}/certificates/{certificate}', [CertificateController::class, 'destroy'])->name('certificates.destroy');
 
-    Route::get('/{establishment}/certificates/{certificate}/print', \App\Http\Controllers\CertificatePrintController::class)->name('certificates.print');
+    Route::get('/{establishment}/certificates/{certificate}/print', CertificatePrintController::class)->name('certificates.print');
 });
+
+Route::get('/updates/validity', function () {
+    return view('updates.index');
+});
+
+Route::patch('updates/validity/update', function () {
+    $certificates = Certificate::get(['id', 'valid_until', 'validity']);
+
+    foreach ($certificates as $certificate) {
+        $validity = Carbon::createFromDate($certificate['valid_until'])->isFuture();
+
+        if ($validity) {
+            $attributes['validity'] = 'Valid';
+        } else {
+            $attributes['validity'] = 'Invalid';
+        }
+
+        if ($certificate->validity != $attributes['validity']) {
+            Certificate::find($certificate->id)->update([
+                'validity' => $attributes['validity']
+            ]);
+        }
+    }
+
+    return redirect(route('administrators.index'))->with('success', 'You have successfully updated the validity of FSICs.');
+})->name('updates.validity');

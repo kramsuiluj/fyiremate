@@ -44,5 +44,8 @@ window.$ = $;
 import jQuery from 'jquery';
 window.jQuery = jQuery;
 
+import Chart from 'chart.js/auto';
+window.Chart = Chart;
+
 await import('jquery-ui/themes/base/all.css');
 await import('jquery-ui/dist/jquery-ui');

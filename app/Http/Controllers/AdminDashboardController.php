@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificate;
 use App\Models\Establishment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -47,6 +48,9 @@ class AdminDashboardController extends Controller
             ->where('status', 'For Re-Inspection')
             ->count();
 
+        $valid = Certificate::where('validity', 'Valid')->count();
+        $invalid = Certificate::where('validity', 'Invalid')->count();
+
         return view('administrators.index', [
             'monthlyEstablishments' => $monthlyEstablishments,
             'quarterlyEstablishments' => $quarterlyEstablishments,
@@ -54,7 +58,9 @@ class AdminDashboardController extends Controller
             'monthlyCompleted' => $monthlyCompleted,
             'monthlyFI' => $monthlyFI,
             'monthlyFC' => $monthlyFC,
-            'monthlyFRI' => $monthlyFRI
+            'monthlyFRI' => $monthlyFRI,
+            'valid' => $valid,
+            'invalid' => $invalid
         ]);
     }
 }
