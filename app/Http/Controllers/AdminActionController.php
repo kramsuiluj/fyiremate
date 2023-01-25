@@ -11,6 +11,8 @@ class AdminActionController extends Controller
 {
     public function index()
     {
+
+
         return view('administrators.actions.index', [
             'actions' => Activity::latest()->paginate(10)
         ]);

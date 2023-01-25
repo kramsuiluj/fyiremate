@@ -44,6 +44,10 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($actions as $action)
+                                    @php
+                                        $description = wordwrap($action->description, 50, "<br />\n");
+
+                                    @endphp
                                     <tr class="hover:bg-gray-100">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center justify-center">
@@ -67,7 +71,7 @@
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs text-slate-600">
-                                                        <span>{{ $action->description }}</span>
+                                                        <span>{!! $description !!}</span>
                                                     </div>
                                                 </div>
                                             </div>

@@ -151,6 +151,7 @@
      data-applicant="{{ $establishment->owner }}"
      data-address="{{ $establishment->address }}"
      data-description="{{ $certificate->description }}"
+     data-description2="{{ $certificate->description2 ?? '' }}"
      data-valid-until="{{ $certificate->valid_until }}"
      data-amount="{{ $establishment->payments->last()->amount_paid }}"
      data-or-number="{{ $establishment->payments->last()->or_number }}"
@@ -266,6 +267,12 @@
             description.style.left = positions.description.x.toString();
         }
 
+        if (document.getElementById('description2')) {
+            let description = document.getElementById('description2');
+            description.style.top = positions.description2.y.toString();
+            description.style.left = positions.description2.x.toString();
+        }
+
         if (document.getElementById('address')) {
             let address = document.getElementById('address');
             address.style.top = positions.address.y.toString();
@@ -309,7 +316,7 @@
             paymentDate.style.top = positions.paymentDate.y.toString();
             paymentDate.style.left = positions.paymentDate.x.toString();
         }
-        
+
         xPos.addEventListener('keydown', () => {
             activeId = active.id;
             active.style.left = xPos.value + 'px';
