@@ -16,7 +16,7 @@ class LogoutController extends Controller
                 ->causedBy($user)
                 ->withProperties(['by' => $user->fullname()])
                 ->log('User has logged out.');
-            return redirect(route('index'));
+            return redirect('/');
         }
 
         activity('Logout')

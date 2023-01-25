@@ -234,7 +234,7 @@ class EstablishmentController extends Controller
         }
 
         if ($fsicFormat && count($fsicFormat) == 4) {
-            $fsicPrefix = $fsicFormat[0] . '-' . $fsicFormat[1] . '-'  .$fsicFormat[2];
+            $fsicPrefix = $fsicFormat[0] . '-' . $fsicFormat[1] . '-' . $fsicFormat[2];
             $fsicId = (int)$fsicFormat[3];
         } else {
             throw ValidationException::withMessages([
@@ -438,7 +438,7 @@ class EstablishmentController extends Controller
             $fsicFormat = explode('-', $attributes['fsic']);
 
             if ($fsicFormat && count($fsicFormat) == 4) {
-                $fsicPrefix = $fsicFormat[0] . '-' . $fsicFormat[1] . '-'  .$fsicFormat[2];
+                $fsicPrefix = $fsicFormat[0] . '-' . $fsicFormat[1] . '-' . $fsicFormat[2];
                 $fsicId = (int)$fsicFormat[3];
             } else {
                 throw ValidationException::withMessages([
@@ -484,6 +484,25 @@ class EstablishmentController extends Controller
             ->log('A user has deleted an establishment record. [' . $establishment->fsic . ']');
 
         return redirect(route('establishments.index'))->with('success', 'You have successfully deleted an Establishment Record.');
+    }
+
+    public function export()
+    {
+        $from = request('from');
+        $to = request('to');
+
+//        dd(Establishment::firstWhere('fsic', 'RO5-0104-23-0004')->payments);
+
+        $establishments = Establishment::latest()->whereBetween('date', [$from, $to])->get(['date', 'owner', 'name', 'address', 'ops_number', 'date_released', 'fsic', 'issuance', 'status', 'occupancy', 'area', 'remarks', 'inspection_date', 'io_number', 'amount', 'realty_tax']);
+
+        $establishments->map(function ($establishment) {
+            $payment = Establishment::firstWhere('fsic', $establishment['fsic'])->payments->last();
+            $establishment['amount_paid'] = $payment['amount_paid'] ?? null;
+            $establishment['date_paid'] = $payment['date_paid'] ?? null;
+            $establishment['or_number'] = $payment['or_number'] ?? null;
+        });
+
+        return (new FastExcel($establishments))->download('actions_logs.xlsx');
     }
 
     protected function convertDate($date, $month): string

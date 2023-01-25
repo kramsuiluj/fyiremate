@@ -10,6 +10,8 @@ class Establishment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $with = ['payments'];
+
     public function payments()
     {
         return $this->hasMany(Payment::class);
@@ -34,10 +36,6 @@ class Establishment extends Model
             $query->when($filters['to'] ?? false, fn ($query, $to) =>
                 $query->whereBetween('date', [$from, $to])
             )
-//            $query->where(fn($query) =>
-//                $query->whereBetween('data', [$from, $to])
-//            )
-//            $query->whereBetween('date', [$from, $to])
         );
     }
 }

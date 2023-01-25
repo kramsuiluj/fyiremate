@@ -31,17 +31,270 @@
             </div>
         </div>
 
-        <x-containers.content>
-            @if($establishments)
-                @if(count($establishments) != 0)
-                    {{ count($establishments) }}
-                @endif
-            @else
-                <div class="p-2">
-                    <p class="font-montserrat text-slate-600 text-sm">Set the range of date to generate reports.</p>
+
+        @if($establishments)
+            <div class="w-11/12 mx-auto my-3 font-montserrat">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 font-montserrat">
+                                <thead class="bg-gray-50">
+                                <tr class="bg-blue-900 w-full">
+                                    <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
+                                        Type of Occupancy
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
+                                        # of Establishments
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
+                                        Date Range
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs font-semibold text-slate-600">
+                                                    <span>Business</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ $business }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ \Carbon\Carbon::parse(request('from'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                    to
+                                                    <span>{{ \Carbon\Carbon::parse(request('to'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs font-semibold text-slate-600">
+                                                    <span>Industrial</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ $industrial }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ \Carbon\Carbon::parse(request('from'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                    to
+                                                    <span>{{ \Carbon\Carbon::parse(request('to'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs font-semibold text-slate-600">
+                                                    <span>Educational</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ $educational }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ \Carbon\Carbon::parse(request('from'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                    to
+                                                    <span>{{ \Carbon\Carbon::parse(request('to'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs font-semibold text-slate-600">
+                                                    <span>Health Care</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ $healthcare }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ \Carbon\Carbon::parse(request('from'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                    to
+                                                    <span>{{ \Carbon\Carbon::parse(request('to'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs font-semibold text-slate-600">
+                                                    <span>Mercantile</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ $mercantile }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ \Carbon\Carbon::parse(request('from'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                    to
+                                                    <span>{{ \Carbon\Carbon::parse(request('to'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs font-semibold text-slate-600">
+                                                    <span>Residential</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ $residential }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ \Carbon\Carbon::parse(request('from'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                    to
+                                                    <span>{{ \Carbon\Carbon::parse(request('to'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs font-semibold text-slate-600">
+                                                    <span>Storage</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ $storage }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            <div class="ml-4">
+                                                <div class="text-xs text-slate-600">
+                                                    <span>{{ \Carbon\Carbon::parse(request('from'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                    to
+                                                    <span>{{ \Carbon\Carbon::parse(request('to'))->isoFormat('MMMM D, YYYY') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            @endif
-        </x-containers.content>
+            </div>
+        @else
+            <div class="py-2 px-2 rounded">
+                <p class="font-montserrat text-sm text-slate-500 flex space-x-1 items-center justify-center underline">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+                    </svg>
+
+                    <span>Set the range of date to generate reports.</span>
+                </p>
+            </div>
+        @endif
+
     </x-containers.main>
 
     @if(session()->has('success'))

@@ -7,7 +7,7 @@
                 <svg id="open" class="w-6 h-6 text-blue-900 hover:text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </div>
 
-            <a href="{{ route('administrators.index') }}" class="font-daysone text-lg tracking-wider" style="font-weight: bold">
+            <a href="{{ route('dashboards.index') }}" class="font-daysone text-lg tracking-wider" style="font-weight: bold">
                 <span class="text-orange-500">FYIRE</span><span class="text-blue-900">MATE</span>
             </a>
         </section>
@@ -24,16 +24,23 @@
                  class="absolute text-sm bg-white border right-0 mr-1.5 mt-1 rounded shadow"
                  style="display: none"
             >
-                <ul class="w-20 text-right">
-                    <li id="logout" class="pr-4 py-1 hover:bg-gray-100 cursor-pointer">
-                        <span>Log out</span>
+                    <ul class="text-right" style="width: 10rem">
+                        <li id="change-password" class="py-1 hover:bg-gray-100 cursor-pointer px-2">
+                            <a href="{{ route('account.edit') }}" class="py-1 hover:bg-gray-100 cursor-pointer px-2 border-b">
+                                <span>Change Password</span>
+                            </a>
+                        </li>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
-                            @csrf
-                            @method('DELETE')
-                        </form>
-                    </li>
-                </ul>
+                        <li id="logout" class="py-1 hover:bg-gray-100 cursor-pointer px-2">
+                            <span class="px-2">Log out</span>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </li>
+                    </ul>
+
             </div>
         </section>
     </div>

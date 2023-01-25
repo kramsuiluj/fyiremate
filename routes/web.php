@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificatePrintController;
 use App\Http\Controllers\EstablishmentController;
@@ -7,6 +9,7 @@ use App\Http\Controllers\InspectionController;
 use App\Http\Controllers\InspectionPrintController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ReportController;
 use App\Models\Certificate;
 use App\Models\Position;
 use Carbon\Carbon;
@@ -16,6 +19,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::view('/', 'index');
     Route::post('/login', LoginController::class)->name('login');
 });
+
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboards.index');
 
 Route::get('/{establishment}/inspections/{inspection}/checklist/print', [InspectionController::class, 'print'])->name('establishments.inspections.checklists.print');
 
@@ -62,6 +67,7 @@ Route::group(['prefix' => 'establishments', 'as' => 'establishments.'], function
     Route::post('/upload', [EstablishmentController::class, 'upload'])->name('upload');
     Route::get('/create', [EstablishmentController::class, 'create'])->name('create');
     Route::post('/', [EstablishmentController::class, 'store'])->name('store');
+    Route::post('/export', [EstablishmentController::class, 'export'])->name('export');
     Route::get('/{establishment}', [EstablishmentController::class, 'show'])->name('show');
     Route::get('/{establishment}/edit', [EstablishmentController::class, 'edit'])->name('edit');
     Route::patch('/{establishment}', [EstablishmentController::class, 'update'])->name('update');
@@ -109,23 +115,10 @@ Route::patch('updates/validity/update', function () {
         }
     }
 
-    return redirect(route('administrators.index'))->with('success', 'You have successfully updated the validity of FSICs.');
+    return redirect(route('dashboards.index'))->with('success', 'You have successfully updated the validity of FSICs.');
 })->name('updates.validity');
 
-Route::get('/reports', function () {
-//    $from = '2022-08-04';
-//    $to = Carbon::now()->toDateString();
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
-//    dd(\App\Models\Establishment::whereBetween('date', [$from, $to])->get());
-
-//    dd(\App\Models\Establishment::where('occupancy', 'business')->get());
-    if (request()->has(['from', 'to'])) {
-        $establishments = \App\Models\Establishment::filter(request(['from', 'to']))->get();
-    } else {
-        $establishments = null;
-    }
-
-    return view('administrators.reports.index', [
-        'establishments' => $establishments
-    ]);
-});
+Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.edit');
+Route::post('/account/update', [AccountController::class, 'update'])->name('account.update');

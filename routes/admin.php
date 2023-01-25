@@ -12,8 +12,6 @@ use App\Http\Controllers\AdminMarshalDefaultController;
 use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('index');
-
 Route::group(['as' => 'fields.'], function () {
     Route::get('/fields', [AdminFieldController::class, 'index'])->name('index');
     Route::post('/id-prefix', [AdminFieldController::class, 'setIdPrefix'])->name('setIdPrefix');
@@ -23,7 +21,7 @@ Route::group(['as' => 'fields.'], function () {
 });
 
 Route::get('/actions/logs', [AdminActionController::class, 'index'])->name('actions.index');
-Route::get('/actions/export', [AdminActionController::class, 'export'])->name('actions.export');
+Route::post('/actions/export', [AdminActionController::class, 'export'])->name('actions.export');
 
 Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
     Route::get('/', [AdminUserController::class, 'index'])->name('index');

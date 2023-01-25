@@ -54,16 +54,16 @@ if (personnel !== null) {
     });
 }
 
-const reports = document.getElementById('reports');
-const reportCategories = document.getElementById('report-categories');
-
-reports.addEventListener('click', () => {
-    if (reportCategories.style.display === 'none') {
-        reportCategories.style.display = 'block';
-    } else {
-        reportCategories.style.display = 'none';
-    }
-});
+// const reports = document.getElementById('reports');
+// const reportCategories = document.getElementById('report-categories');
+//
+// reports.addEventListener('click', () => {
+//     if (reportCategories.style.display === 'none') {
+//         reportCategories.style.display = 'block';
+//     } else {
+//         reportCategories.style.display = 'none';
+//     }
+// });
 
 document.addEventListener('click', (event) => {
     let element = event.target;

@@ -9,7 +9,7 @@
     </x-sub-header>
 
     <x-containers.main>
-        <div class="w-11/12 mx-auto my-3 flex border-b border-gray-300 pb-2">
+        <div x-data="{ show: false }" class="w-11/12 mx-auto my-3 flex border-b border-gray-300 pb-2">
             <div class="font-montserrat flex">
                 <a href="{{ route('establishments.create') }}"
                    class="text-blue-600 border-2 border-blue-600 bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xs px-4 py-1.5 text-center mr-2 mb-2 flex items-center space-x-2">
@@ -36,6 +36,7 @@
                 </a>
 
                 <button type="button"
+                        @click="show = !show"
                         class="text-green-600 border-2 border-green-600 bg-white focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-xs px-4 py-1.5 text-center mr-2 mb-2 flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="w-4 h-4">
@@ -45,6 +46,67 @@
 
                     <span>Export Establishments</span>
                 </button>
+
+                <div x-show="show" style="display: none" class="relative z-10" aria-labelledby="modal-title"
+                     role="dialog"
+                     aria-modal="true">
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+                    <div class="fixed inset-0 z-10 overflow-y-auto">
+                        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
+                                <div class="bg-white px-4 pt-5 pb-4">
+                                    <div class="">
+                                        <div class="text-center space-y-5">
+                                            <div class="flex justify-between">
+
+
+                                                <h3 class="font-montserrat font-semibold leading-6 text-gray-900 text-left"
+                                                    id="modal-title">EXPORT ACTIONS LOG</h3>
+
+                                                <span @click="show = false" class="cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+</svg>
+
+                                                </span>
+                                            </div>
+                                            <form action="{{ route('establishments.export') }}" method="POST" class="font-montserrat text-slate-600 space-y-5">
+                                                @csrf
+
+                                                <div class="flex space-x-2 items-center items-center justify-center">
+                                                    <div>
+                                                        <label for="from" class="text-sm font-semibold">FROM</label>
+                                                        <input name="from" type="date" class="text-sm bg-gray-50 border border-gray-300 rounded-md" value="{{ request('from') }}" required>
+                                                    </div>
+
+                                                    <div class="">
+                                                        <label for="to" class="text-sm font-semibold">TO</label>
+                                                        <input name="to" type="date" class="text-sm bg-gray-50 border border-gray-300 rounded-md" value="{{ request('to') }}" required>
+                                                    </div>
+                                                </div>
+
+                                                <button @click="show = false" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full">EXPORT</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--                                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 font-montserrat">--}}
+                                {{--                                    <button @click="show = false" id="add-element" type="button" class="inline-flex--}}
+                                {{--                                    w-full--}}
+                                {{--                                    justify-center--}}
+                                {{--                                    rounded-md border--}}
+                                {{--                                    border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white--}}
+                                {{--                                    shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-red-500--}}
+                                {{--                                    focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Add</button>--}}
+                                {{--                                    <button @click="show = false" type="button" class="mt-3 inline-flex w-full--}}
+                                {{--                                    justify-center--}}
+                                {{--                                    rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>--}}
+                                {{--                                </div>--}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

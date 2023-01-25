@@ -14,13 +14,16 @@ class AdminActionController extends Controller
 
 
         return view('administrators.actions.index', [
-            'actions' => Activity::latest()->paginate(10)
+            'actions' => Activity::latest()->filter(request(['from', 'to']))->paginate(10)->withQueryString()
         ]);
     }
 
     public function export()
     {
-        $actions = Activity::latest()->get(['created_at', 'log_name', 'description', 'properties'])->toArray();
+        $from = request('from');
+        $to = request('to');
+
+        $actions = Activity::latest()->whereBetween('created_at', [$from, $to])->get(['created_at', 'log_name', 'description', 'properties'])->toArray();
 
         $actions = array_map(function ($action) {
             $action['created_at'] = Carbon::createFromTimeString($action['created_at'])->isoFormat('MMMM D, YYYY h:mm:ss a');
@@ -29,5 +32,7 @@ class AdminActionController extends Controller
         }, $actions);
 
         return (new FastExcel(collect($actions)))->download('actions_logs.xlsx');
+
+//        return redirect(route('administrators.actions.index'))->with('success', 'You have successfully exported actions log records.');
     }
 }
