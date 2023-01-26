@@ -163,7 +163,7 @@
                                     <thead class="bg-gray-50">
                                     <tr class="bg-blue-900 w-full">
                                         <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
-                                            #
+                                            FSIC #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-xs font-medium text-white tracking-wider">
                                             Establishment
@@ -191,8 +191,8 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="ml-4">
-                                                        <div class="text-xs font-semibold text-slate-600">
-                                                            {{ $establishment->name }}
+                                                        <div class="text-xs font-semibold text-slate-600 hover:underline">
+                                                            <a href="{{ route('establishments.show', $establishment->id) }}">{{ $establishment->name }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -238,18 +238,18 @@
                                                                     IO
                                                                 </a>
 
-                                                                <a href="{{ route('establishments.show', $establishment->id) }}"
-                                                                   title="View Establishment Details" class="">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         viewBox="0 0 24 24" fill="none"
-                                                                         stroke="currentColor" stroke-width="2.5"
-                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                         class="feather feather-eye w-5 h-5 text-green-500">
-                                                                        <path
-                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                                    </svg>
-                                                                </a>
+{{--                                                                <a href="{{ route('establishments.show', $establishment->id) }}"--}}
+{{--                                                                   title="View Establishment Details" class="">--}}
+{{--                                                                    <svg xmlns="http://www.w3.org/2000/svg"--}}
+{{--                                                                         viewBox="0 0 24 24" fill="none"--}}
+{{--                                                                         stroke="currentColor" stroke-width="2.5"--}}
+{{--                                                                         stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                                                         class="feather feather-eye w-5 h-5 text-green-500">--}}
+{{--                                                                        <path--}}
+{{--                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>--}}
+{{--                                                                        <circle cx="12" cy="12" r="3"></circle>--}}
+{{--                                                                    </svg>--}}
+{{--                                                                </a>--}}
 
                                                                 <a href="{{ route('establishments.edit', $establishment->id) }}"
                                                                    title="Edit Establishment Details" class="">
