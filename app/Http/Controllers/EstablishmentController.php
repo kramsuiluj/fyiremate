@@ -502,7 +502,7 @@ class EstablishmentController extends Controller
             $establishment['or_number'] = $payment['or_number'] ?? null;
         });
 
-        return (new FastExcel($establishments))->download('actions_logs.xlsx');
+        return (new FastExcel($establishments))->download('establishments_list.xlsx');
     }
 
     protected function convertDate($date, $month): string
