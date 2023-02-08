@@ -8,61 +8,90 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>IO - {{ $inspection->io_number }}</title>
     <style>
-        body {
-
-        }
-
-        @page {
-            size: A4 portrait;
-            margin: 0;
-        }
-
-        #page[data-size="A4"] {
-            width: 21cm;
-            height: 29.7cm;
-            background:
-                linear-gradient(-90deg, rgba(0,0,0,.05) 1px, transparent 1px),
-                linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
-                linear-gradient(-90deg, rgba(0, 0, 0, .04) 1px, transparent 1px),
-                linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
-                linear-gradient(transparent 3px, #f2f2f2 3px, #f2f2f2 78px, transparent 78px),
-                linear-gradient(-90deg, #aaa 1px, transparent 1px),
-                linear-gradient(-90deg, transparent 3px, #f2f2f2 3px, #f2f2f2 78px, transparent 78px),
-                linear-gradient(#aaa 1px, transparent 1px),
-                #f2f2f2;
-            background-size:
-                10px 10px,
-                10px 10px,
-                80px 80px,
-                80px 80px,
-                80px 80px,
-                80px 80px,
-                80px 80px,
-                80px 80px;
+        #page {
+            background: linear-gradient(-90deg, rgba(0, 0, 0, .05) 1px, transparent 1px),
+            linear-gradient(rgba(0, 0, 0, .05) 1px, transparent 1px),
+            linear-gradient(-90deg, rgba(0, 0, 0, .04) 1px, transparent 1px),
+            linear-gradient(rgba(0, 0, 0, .04) 1px, transparent 1px),
+            linear-gradient(transparent 3px, #f2f2f2 3px, #f2f2f2 78px, transparent 78px),
+            linear-gradient(-90deg, #aaa 1px, transparent 1px),
+            linear-gradient(-90deg, transparent 3px, #f2f2f2 3px, #f2f2f2 78px, transparent 78px),
+            linear-gradient(#aaa 1px, transparent 1px),
+            #f2f2f2;
+            background-size: 10px 10px,
+            10px 10px,
+            80px 80px,
+            80px 80px,
+            80px 80px,
+            80px 80px,
+            80px 80px,
+            80px 80px;
         }
 
         .draggable {
             position: absolute;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 11pt;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        header > section {
-            width: 21cm;
         }
 
         @media print {
-            section, header {
+            section, header, #sizes-container, footer {
                 display: none;
             }
+        }
+    </style>
+
+    <style id="short-styles">
+        @page {
+            size: 215.9mm 279.4mm;
+            margin: 1%;
+        }
+
+        #page {
+            width: 215.9mm;
+            height: 279.4mm;
+        }
+
+        header > section {
+            width: 215.9mm;
+        }
+    </style>
+
+    <style id="long-styles">
+        @page {
+            size: 215.9mm 330.2mm;
+            margin: 1%;
+        }
+
+        #page {
+            width: 215.9mm;
+            height: 330.2mm;
+        }
+
+        header > section {
+            width: 215.9mm;
+        }
+    </style>
+
+    <style id="a4-styles">
+        @page {
+            size: 215.9mm 297mm;
+            margin: 1%;
+        }
+
+        #page {
+            width: 215.9mm;
+            height: 297mm;
+        }
+
+        header > section {
+            width: 215.9mm;
         }
     </style>
 </head>
 <body class="bg-gray-900">
 
-<header class="mb-5">
+<header class="mb-2">
     <section class="bg-gray-200 mx-auto flex justify-between items-center p-2 border-b-2 border-l-2 border-r-2
         border-gray-400 rounded-bl rounded-br">
         <div x-data="{ show: false }" class="flex items-center space-x-3">
@@ -141,6 +170,23 @@
     </section>
 </header>
 
+<div id="sizes-container" style="width: 21cm" class="mx-auto mb-3">
+    <div class="flex justify-end space-x-2">
+        <button id="short-button" class="bg-white px-2 rounded cursor-pointer hover:bg-blue-200 hover:text-black w-7 h-7 flex
+        justify-center">
+            <span>S</span>
+        </button>
+        <button id="a4-button" class="px-2 rounded cursor-pointer hover:bg-blue-200 hover:text-black w-7 h-7 flex
+        justify-center bg-blue-500 text-white">
+            <span>A4</span>
+        </button>
+        <button id="long-button" class="bg-white px-2 rounded cursor-pointer hover:bg-blue-200 hover:text-black w-7 h-7 flex
+        justify-center">
+            <span>L</span>
+        </button>
+    </div>
+</div>
+
 <form id="positions" action="{{ route('establishments.inspections.positions') }}" method="POST" style="display: none">
     @csrf
     @method('PATCH')
@@ -166,8 +212,13 @@
 
 </div>
 
-<div id="page" class="bg-white relative mx-auto justify-between outline outline-gray-400 box-border"
-     data-size="A4"></div>
+<div id="page" class="bg-white relative mx-auto justify-between">
+{{--    outline outline-gray-400 box-border--}}
+</div>
+
+<footer>
+    <span class="text-slate-900">Fyiremate @ 2023</span>
+</footer>
 
 <script>
     window.onload = function () {
@@ -383,6 +434,55 @@
             });
 
             textContent.value = '';
+        });
+
+        const a4Styles = document.getElementById('a4-styles');
+        const shortStyles = document.getElementById('short-styles');
+        const longStyles = document.getElementById('long-styles');
+
+        const a4Button = document.getElementById('a4-button');
+        const shortButton = document.getElementById('short-button');
+        const longButton = document.getElementById('long-button');
+
+        shortStyles.disabled = true;
+        longStyles.disabled = true;
+
+        a4Button.addEventListener('click', () => {
+            if (a4Styles.disabled) {
+                shortStyles.disabled = true;
+                longStyles.disabled = true;
+                a4Styles.disabled = false;
+
+                longButton.classList.remove('bg-blue-500', 'text-white');
+                shortButton.classList.remove('bg-blue-500', 'text-white');
+                a4Button.classList.add('bg-blue-500', 'text-white');
+            }
+        });
+
+        shortButton.addEventListener('click', () => {
+            if (shortStyles.disabled) {
+                a4Styles.disabled = true;
+                longStyles.disabled = true;
+                shortStyles.disabled = false;
+
+                a4Button.classList.remove('bg-blue-500', 'text-white');
+                longButton.classList.remove('bg-blue-500', 'text-white');
+                a4Button.classList.add('bg-white', 'text-black');
+                shortButton.classList.add('bg-blue-500', 'text-white');
+            }
+        });
+
+        longButton.addEventListener('click', () => {
+            if (longStyles.disabled) {
+                a4Styles.disabled = true;
+                shortStyles.disabled = true;
+                longStyles.disabled = false;
+
+                a4Button.classList.remove('bg-blue-500', 'text-white');
+                shortButton.classList.remove('bg-blue-500', 'text-white');
+                a4Button.classList.add('bg-white', 'text-black');
+                longButton.classList.add('bg-blue-500', 'text-white');
+            }
         });
     }
 </script>

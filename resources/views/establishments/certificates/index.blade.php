@@ -88,7 +88,7 @@
                                             <div class="flex items-center justify-center">
                                                 <div class="ml-4">
                                                     <div class="text-xs text-slate-600">
-                                                        {{ date('F j, Ya', strtotime($certificate->filled_date)) }}
+                                                        {{ date('F j, Y', strtotime($certificate->filled_date)) }}
                                                     </div>
                                                 </div>
                                             </div>

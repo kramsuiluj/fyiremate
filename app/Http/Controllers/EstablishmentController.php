@@ -18,11 +18,6 @@ class EstablishmentController extends Controller
     {
         $establishment = Establishment::latest('id')->filter(request(['search']))->paginate(10)->withQueryString();
 
-//        QueryBuilder::for(Establishment::class)
-//            ->allowedFilters(['name', 'owner'])
-//            ->paginate(10)
-//            ->withQueryString()
-
         return view('establishments.index', [
             'establishments' => $establishment
         ]);
@@ -490,8 +485,6 @@ class EstablishmentController extends Controller
     {
         $from = request('from');
         $to = request('to');
-
-//        dd(Establishment::firstWhere('fsic', 'RO5-0104-23-0004')->payments);
 
         $establishments = Establishment::latest()->whereBetween('date', [$from, $to])->get(['date', 'owner', 'name', 'address', 'ops_number', 'date_released', 'fsic', 'issuance', 'status', 'occupancy', 'area', 'remarks', 'inspection_date', 'io_number', 'amount', 'realty_tax']);
 
