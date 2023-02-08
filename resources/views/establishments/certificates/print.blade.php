@@ -475,7 +475,7 @@
 
                 a4Button.classList.remove('bg-blue-500', 'text-white');
                 longButton.classList.remove('bg-blue-500', 'text-white');
-                a4Button.classList.add('bg-white', 'text-black');
+                a4Button.classList.add('bg-white');
                 shortButton.classList.add('bg-blue-500', 'text-white');
             }
         });
@@ -488,7 +488,7 @@
 
                 a4Button.classList.remove('bg-blue-500', 'text-white');
                 shortButton.classList.remove('bg-blue-500', 'text-white');
-                a4Button.classList.add('bg-white', 'text-black');
+                a4Button.classList.add('bg-white');
                 longButton.classList.add('bg-blue-500', 'text-white');
             }
         });
