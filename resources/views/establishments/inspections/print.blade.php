@@ -177,7 +177,7 @@
             <span>S</span>
         </button>
         <button id="a4-button" class="px-2 rounded cursor-pointer hover:bg-blue-200 hover:text-black w-7 h-7 flex
-        justify-center bg-blue-500 text-white">
+        justify-center bg-blue-500 text-white border-2">
             <span>A4</span>
         </button>
         <button id="long-button" class="bg-white px-2 rounded cursor-pointer hover:bg-blue-200 hover:text-black w-7 h-7 flex
@@ -213,7 +213,6 @@
 </div>
 
 <div id="page" class="bg-white relative mx-auto justify-between">
-{{--    outline outline-gray-400 box-border--}}
 </div>
 
 <footer>
@@ -258,7 +257,7 @@
         for (const element in elements) {
             const item = document.createElement('div');
             item.id = element;
-            item.classList.add('draggable', 'whitespace-nowrap', 'cursor-move');
+            item.classList.add('draggable', 'whitespace-nowrap', 'cursor-move', 'font-bold');
             item.innerHTML = elements[element];
 
             page.append(item);
@@ -407,7 +406,7 @@
             let newElement = document.createElement('div');
             newElement.id = id.toString();
             id++;
-            newElement.classList.add('draggable', 'whitespace-nowrap');
+            newElement.classList.add('draggable', 'whitespace-nowrap', 'font-bold', 'cursor-move');
             newElement.innerText = textContent.value;
 
             page.append(newElement);
@@ -453,9 +452,9 @@
                 longStyles.disabled = true;
                 a4Styles.disabled = false;
 
-                longButton.classList.remove('bg-blue-500', 'text-white');
-                shortButton.classList.remove('bg-blue-500', 'text-white');
-                a4Button.classList.add('bg-blue-500', 'text-white');
+                longButton.classList.remove('bg-blue-500', 'text-white', 'border-2');
+                shortButton.classList.remove('bg-blue-500', 'text-white', 'border-2');
+                a4Button.classList.add('bg-blue-500', 'text-white', 'border-2');
             }
         });
 
@@ -465,10 +464,10 @@
                 longStyles.disabled = true;
                 shortStyles.disabled = false;
 
-                a4Button.classList.remove('bg-blue-500', 'text-white');
-                longButton.classList.remove('bg-blue-500', 'text-white');
+                a4Button.classList.remove('bg-blue-500', 'text-white', 'border-2');
+                longButton.classList.remove('bg-blue-500', 'text-white', 'border-2');
                 a4Button.classList.add('bg-white');
-                shortButton.classList.add('bg-blue-500', 'text-white');
+                shortButton.classList.add('bg-blue-500', 'text-white', 'border-2');
             }
         });
 
@@ -478,10 +477,10 @@
                 shortStyles.disabled = true;
                 longStyles.disabled = false;
 
-                a4Button.classList.remove('bg-blue-500', 'text-white');
-                shortButton.classList.remove('bg-blue-500', 'text-white');
+                a4Button.classList.remove('bg-blue-500', 'text-white','border-2');
+                shortButton.classList.remove('bg-blue-500', 'text-white','border-2');
                 a4Button.classList.add('bg-white');
-                longButton.classList.add('bg-blue-500', 'text-white');
+                longButton.classList.add('bg-blue-500', 'text-white', 'border-2');
             }
         });
     }
