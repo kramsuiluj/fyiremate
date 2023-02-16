@@ -52,8 +52,6 @@
                         <div class="mb-5">
                             <div class="flex justify-between">
                                 <label class="block mb-2 text-sm font-medium text-slate-600 dark:text-white" for="default_size">Import Establishments</label>
-                                <label class="block mb-2 text-xs font-medium text-blue-500 underline dark:text-white"
-                                       for="default_size">Download Sample Format</label>
                             </div>
                             <input name="establishments" class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="small_size" type="file" style="width: 30rem" required>
                             <p class="text-xs text-gray-500 mt-1">Accepted file type: (XLSX).</p>
